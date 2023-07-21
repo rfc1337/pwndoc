@@ -188,7 +188,7 @@ expressions.filters.convertDate = function(input, s) {
             return (day<10 ? '0'+day: day) + " " + monthsFull[month] + " " + year;
         }
         if (s === "short") {
-            return (day<10 ? '0'+day: day) + " " + monthsShort[month] + " " + year;
+            return (day<10 ? '0'+day: day) + "/" + monthsShort[month] + "/" + year;
         }
     }
 }
@@ -200,7 +200,7 @@ expressions.filters.convertDateLocale = function(input, locale, style) {
         var options = { day: '2-digit', month: '2-digit' , year: 'numeric'}
 
         if (style === "full")
-            options = { day: 'numeric', month: 'long', year: 'numeric', month: 'long'}
+            options = { day: 'numeric', month: 'long', year: 'numeric'}
 
         return date.toLocaleDateString(locale, options)
 
