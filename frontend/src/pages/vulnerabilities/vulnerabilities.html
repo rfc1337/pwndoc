@@ -263,7 +263,11 @@
             </div>
         </q-card-section>
         <q-card-section>
-            <textarea-array :label="$t('references')" v-model="currentVulnerability.details[currentDetailsIndex].references" />
+            <q-field borderless :label="$t('references')" stack-label>
+                <template v-slot="control">
+                    <basic-editor   :collab="false" :idUnique="currentVulnerability._id+'-references'" noAffix v-model="currentVulnerability.details[currentDetailsIndex].references" />
+                </template>
+            </q-field>
         </q-card-section>
 
         <q-expansion-item 
@@ -427,7 +431,11 @@
             </div>
         </q-card-section>
         <q-card-section>
-            <textarea-array :label="$t('references')" v-model="currentVulnerability.details[currentDetailsIndex].references" />
+            <q-field borderless :label="$t('references')" stack-label class="basic-editor">
+                <template v-slot="control">
+                    <basic-editor :idUnique="currentVulnerability._id+'-references'"   noAffix v-model="currentVulnerability.details[currentDetailsIndex].references" />
+                </template>
+            </q-field>
         </q-card-section>
 
         <q-expansion-item 
@@ -567,7 +575,11 @@
                         />
                     </q-card-section>
                     <q-card-section>
-                        <textarea-array :label="$t('references')" v-model="currentVulnerability.details[currentDetailsIndex].references" />
+                        <q-field borderless :label="$t('references')" stack-label class="basic-editor">
+                            <template v-slot="control">
+                                <basic-editor noAffix :idUnique="currentVulnerability._id+'-references'"  v-model="currentVulnerability.details[currentDetailsIndex].references" />
+                            </template>
+                        </q-field>
                     </q-card-section>
 
                     <q-expansion-item 
@@ -745,14 +757,25 @@
                                 />
                             </q-card-section>
                             <q-card-section>
-                                <q-input
-                                :bg-color="!($_.isEqual(currentVulnerability.details[currentDetailsIndex].references, update.references))?'diffbackground':''"
-                                :label="$t('references')"
+                                <q-field 
+                                borderless 
+                                :label="$t('references')" 
                                 stack-label
-                                :value="(update.references && update.references.length > 0) ? update.references.join('\n') : ''"
-                                type="textarea"
-                                readonly
-                                />
+                                :class="
+                                (currentVulnerability.details[currentDetailsIndex].references || update.references) &&
+                                (currentVulnerability.details[currentDetailsIndex].references != update.references)
+                                ?'bg-diffbackground':''
+                                "
+                                class="basic-editor"
+                                readonly>
+                                    <template v-slot="control">
+                                        <basic-editor noAffix 
+                                        v-model="update.references"
+                                        :idUnique="currentVulnerability._id+'-references'"
+                                        :diff="currentVulnerability.details[currentDetailsIndex].references || ''"
+                                        :editable=false />
+                                    </template>
+                                </q-field>
                             </q-card-section>
 
                             <q-expansion-item 

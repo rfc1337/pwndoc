@@ -199,7 +199,7 @@ export default {
                     remediation: "",
                     remediationComplexity: "",
                     priority: "",
-                    references: [],
+                    references: "",
                     cvssv3: "",
                     category: category.name,
                     customFields: Utils.filterCustomFields('finding', category.name, this.$parent.customFields, [], this.$parent.audit.language)
@@ -214,7 +214,7 @@ export default {
                     remediation: "",
                     remediationComplexity: "",
                     priority: "",
-                    references: [],
+                    references: "",
                     cvssv3: "",
                     customFields: Utils.filterCustomFields('finding', '', this.$parent.customFields, [], this.$parent.audit.language)
                 };

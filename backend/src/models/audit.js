@@ -23,7 +23,7 @@ var Finding = {
     remediation:            String,
     remediationComplexity:  {type: Number, enum: [1,2,3]},
     priority:               {type: Number, enum: [1,2,3,4]},
-    references:             [String],
+    references:             String,
     cvssv3:                 String,
     paragraphs:             [Paragraph],
     poc:                    String,

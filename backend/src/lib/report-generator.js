@@ -811,7 +811,7 @@ async function prepAuditData(data, settings) {
             remediation: await splitHTMLParagraphs(finding.remediation),
             remediationComplexity: finding.remediationComplexity || "",
             priority: finding.priority || "",
-            references: finding.references || [],
+            references: await splitHTMLParagraphs(finding.remediation),
             poc: await splitHTMLParagraphs(finding.poc),
             affected: finding.scope || "",
             status: finding.status || "",

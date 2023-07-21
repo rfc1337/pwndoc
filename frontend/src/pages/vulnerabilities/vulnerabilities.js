@@ -364,7 +364,7 @@ export default {
                     description: '',
                     observation: '',
                     remediation: '',
-                    references: [],
+                    references: '',
                     customFields: []
                 }
                 details.customFields = Utils.filterCustomFields('vulnerability', this.currentVulnerability.category, this.customFields, [], this.currentLanguage)

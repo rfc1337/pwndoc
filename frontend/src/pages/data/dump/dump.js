@@ -95,24 +95,6 @@ export default {
                         if (ext === "yml") {
                             try {
                                 vulnFile = YAML.safeLoad(fileReader.result);
-                                if (typeof vulnFile === 'object') {
-                                    if (Array.isArray(vulnFile)) {
-                                        vulnFile.forEach(vuln => {
-                                            if (Array.isArray(vuln.references) && vuln.references.length > 0) {
-                                                vuln.details.forEach(d => {
-                                                    if (!Array.isArray(d.references) || d.references.length == 0) {
-                                                        d.references = vuln.references
-                                                    }
-                                                })
-                                            }
-                                        })
-                                        this.vulnerabilities = vulnFile;
-                                    }
-                                    else
-                                        this.vulnerabilities.push(vulnFile);
-                                }
-                                else
-                                    throw new Error ($t('invalidYamlFormat'))
                             }
                             catch(err) {
                                 console.log(err);
@@ -181,11 +163,7 @@ export default {
                 details.description = this.formatSerpicoText(vuln.overview);
                 details.observation = this.formatSerpicoText(vuln.poc);
                 details.remediation = this.formatSerpicoText(vuln.remediation);
-                details.references = []
-                if (vuln.references && vuln.references !== "") {
-                    vuln.references = vuln.references.replace(/<paragraph>/g, '')
-                    details.references = vuln.references.split('</paragraph>').filter(Boolean)
-                }
+                details.references = this.formatSerpicoText(vuln.references);
                 tmpVuln.details = [details];
                 
                 result.push(tmpVuln);
