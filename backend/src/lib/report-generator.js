@@ -185,10 +185,10 @@ expressions.filters.convertDate = function(input, s) {
         var month = date.getUTCMonth();
         var year = date.getUTCFullYear();
         if (s === "full") {
-            return days[date.getUTCDay()] + ", " + monthsFull[month] + " " + (day<10 ? '0'+day: day) + ", " + year;
+            return (day<10 ? '0'+day: day) + " " + monthsFull[month] + " " + year;
         }
         if (s === "short") {
-            return monthsShort[month] + "/" + (day<10 ? '0'+day: day) + "/" + year;
+            return (day<10 ? '0'+day: day) + " " + monthsShort[month] + " " + year;
         }
     }
 }
@@ -197,10 +197,10 @@ expressions.filters.convertDate = function(input, s) {
 expressions.filters.convertDateLocale = function(input, locale, style) {
     var date = new Date(input);
     if (date != "Invalid Date") {
-        var options = { year: 'numeric', month: '2-digit', day: '2-digit'}
+        var options = { day: '2-digit', month: '2-digit' , year: 'numeric'}
 
         if (style === "full")
-            options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+            options = { day: 'numeric', month: 'long', year: 'numeric', month: 'long'}
 
         return date.toLocaleDateString(locale, options)
 
